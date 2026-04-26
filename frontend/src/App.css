@@ -83,7 +83,7 @@ button,input{font-family:inherit;}
   backdrop-filter:blur(16px);
   -webkit-backdrop-filter:blur(16px);
   border:1px solid rgba(10,10,16,0.08);
-  border-radius:999px;
+  border-radius:14px;
   box-shadow:0 4px 18px rgba(10,10,16,0.06), 0 1px 0 rgba(10,10,16,0.04);
   height:56px;
   transition:box-shadow 250ms var(--ease),background 250ms ease;
