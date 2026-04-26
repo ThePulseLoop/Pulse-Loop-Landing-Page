@@ -548,7 +548,15 @@ button,input{font-family:inherit;}
   [data-theme="light"] .close-line .cl-1,
   [data-theme="light"] .close-line .cl-2{white-space:normal;}
 }
-[data-theme="light"] .final-h{color:#F0F0EC;margin-bottom:48px;font-weight:700;}
+[data-theme="light"] .final-h{
+  color:rgba(240,240,236,0.75);
+  margin-bottom:48px;
+  font-family:var(--font-b);
+  font-weight:400;
+  font-size:clamp(15px,1.8vw,19px);
+  line-height:1.7;
+  letter-spacing:0;
+}
 
 /* Pill controls grouping */
 [data-theme="light"] .fi-row-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%;}
