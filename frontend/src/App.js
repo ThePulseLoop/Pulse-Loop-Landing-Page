@@ -567,10 +567,9 @@ function App() {
             <div>
               <div className="foot-col-h">Product</div>
               <div className="foot-col-links">
-                <a href="#">Intelligence</a>
-                <a href="#">Methodology Certificate</a>
-                <a href="#">EU Signal Sources</a>
-                <a href="#">Pricing</a>
+                <a href="#f1" onClick={(e) => { e.preventDefault(); scrollToId("f1")(); }}>Hypothesis</a>
+                <a href="#f2" onClick={(e) => { e.preventDefault(); scrollToId("f2")(); }}>Intelligence</a>
+                <a href="#f3" onClick={(e) => { e.preventDefault(); scrollToId("f3")(); }}>Methodology</a>
               </div>
             </div>
             <div>
