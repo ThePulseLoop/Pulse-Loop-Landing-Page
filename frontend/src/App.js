@@ -1,10 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Sun, Moon } from "lucide-react";
 import "./App.css";
 
-const Logo = ({ size = 20 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-    <circle cx="12" cy="12" r="9" stroke="#2EE8A0" strokeWidth="2" />
-    <path d="M3 12h4l2 -5 3 10 2 -7 2 4h5" stroke="#E7EC0C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+const Logo = ({ size = 22 }) => (
+  <svg
+    width={size}
+    height={(size * 333) / 400}
+    viewBox="0 0 400 333"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden
+    style={{ flexShrink: 0 }}
+  >
+    <g transform="matrix(0.41873 0.000141877 -0.00014171 0.419225 0.16748 -162.659)" fill="currentColor">
+      <path d="M538.403 464.548C581.126 462.042 611.775 472.369 645.607 498.016C705.214 498.722 761.121 523.627 790.829 577.761C795.989 587.163 799.496 596.787 803.799 606.567C805.751 607.575 807.68 608.629 809.584 609.726C845.839 630.629 860.415 655.11 865.132 695.78C866.355 706.318 866.022 718.823 868.01 729.12C868.813 733.276 874.453 739.629 876.254 746.398L874.24 748.069C851.623 749.849 819.919 747.953 795.006 748.523C781.015 748.843 671.672 749.261 669.653 746.841C656.734 731.36 643.19 679.259 621.828 666.502C616.082 663.07 609.174 662.165 602.739 664.003C588.32 668.183 578.627 695.478 573.342 708.248C566.249 725.374 559.263 742.544 552.382 759.756C548.418 769.742 543.066 784.601 538.205 793.804L537.535 795.055C526.835 769.476 515.718 735.054 505.983 708.305C497.923 689.903 492.535 668.041 484.899 649.284C478.972 634.722 474.657 611.428 458.326 605.36C451.934 603.021 444.854 603.467 438.804 606.588C421.203 615.516 411.3 654.212 404.139 672.377C394.387 697.111 384.079 723.072 375.583 748.238L146.113 748.339C144.453 707.746 169.443 668.494 199.581 643.066C208.872 615.205 208.828 603.299 229.718 578.551C258.321 544.665 287.941 532.771 330.726 528.753C359.861 490.493 406.986 471.903 454.705 476.83C464.353 477.826 473.919 479.813 483.448 481.623C505.015 470.204 514.374 467.448 538.403 464.548Z" />
+      <path d="M448.226 709.515C451.73 712.618 458.163 732.387 460.097 737.782L493.208 831.689C498.78 847.123 508.008 879.626 519.977 888.583C537.27 901.524 557.39 890.914 565.05 872.322C576.487 844.563 586.785 818.539 598.729 791.264C602.839 781.88 606.854 766.288 612.205 758.598L613.699 758.379C622.999 766.114 627.455 799.062 651.632 800.785C676.879 802.584 701.876 801.851 727.189 801.828L884.707 801.759C882.606 846.778 866.447 873.138 827.427 895.141L827.406 896.403C826.629 926.335 809.542 961.663 787.252 981.458C753.428 1011.5 723.798 1018.73 680.257 1017.61C688.797 1036.69 696.503 1058.02 704.104 1077.69C705.763 1082.95 708.212 1089.12 710.142 1094.39C692.539 1095.56 658.344 1095 640.441 1094.58C629.039 1067.01 604.875 1032.53 579.387 1017.33C548.527 998.934 540.48 998.074 516.37 968.826C504.522 973.118 490.218 978.53 478.061 981.224C444.73 988.61 404.604 982.873 375.894 964.147C351.557 948.273 338.564 926.103 332.789 898.079C322.537 900.554 313.74 902.463 303.3 903.696C231.812 912.145 169.147 873.1 152.019 801.906L303.931 801.709C330.245 801.732 377.277 803.936 400.969 798.846C427.497 793.147 435.131 733.725 447.743 710.391L448.226 709.515Z" />
+    </g>
   </svg>
 );
 
@@ -22,6 +32,20 @@ function App() {
   const certCardRef = useRef(null);
 
   const [finalEmail, setFinalEmail] = useState("");
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("pl-theme") || "dark";
+    }
+    return "dark";
+  });
+
+  // Apply theme to <html>
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("pl-theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
 
   // Nav scroll
   useEffect(() => {
@@ -66,6 +90,11 @@ function App() {
 
     const tick = () => {
       cx.clearRect(0, 0, W, H);
+      const isLight = document.documentElement.getAttribute("data-theme") === "light";
+      const greenRGB = isLight ? "0,162,108" : "46,232,160";
+      const yellowRGB = isLight ? "163,166,0" : "231,236,12";
+      const lineAlphaMul = isLight ? 0.18 : 0.1;
+      const fillAlphaMul = isLight ? 0.85 : 0.75;
       const LINK = W * 0.22;
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
@@ -75,7 +104,7 @@ function App() {
             cx.beginPath();
             cx.moveTo(a.x, a.y);
             cx.lineTo(b.x, b.y);
-            cx.strokeStyle = `rgba(46,232,160,${(1 - d / LINK) * 0.1})`;
+            cx.strokeStyle = `rgba(${greenRGB},${(1 - d / LINK) * lineAlphaMul})`;
             cx.lineWidth = 0.6;
             cx.stroke();
           }
@@ -84,9 +113,9 @@ function App() {
       for (const n of nodes) {
         n.phase += n.sp;
         const r = n.r + Math.sin(n.phase) * 1.2;
-        const col = n.yellow ? "231,236,12" : "46,232,160";
+        const col = n.yellow ? yellowRGB : greenRGB;
         const g = cx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 5);
-        g.addColorStop(0, `rgba(${col},0.2)`);
+        g.addColorStop(0, `rgba(${col},${isLight ? 0.18 : 0.2})`);
         g.addColorStop(1, `rgba(${col},0)`);
         cx.beginPath();
         cx.arc(n.x, n.y, r * 5, 0, Math.PI * 2);
@@ -94,7 +123,7 @@ function App() {
         cx.fill();
         cx.beginPath();
         cx.arc(n.x, n.y, r, 0, Math.PI * 2);
-        cx.fillStyle = `rgba(${col},0.75)`;
+        cx.fillStyle = `rgba(${col},${fillAlphaMul})`;
         cx.fill();
         n.x += n.vx; n.y += n.vy;
         if (n.x < 0 || n.x > W) n.vx *= -1;
@@ -184,7 +213,7 @@ function App() {
       <nav id="nav" ref={navRef}>
         <div className="nav-w">
           <a href="#" className="nav-logo">
-            <span className="nav-logo-mark"><Logo size={20} /></span>
+            <span className="nav-logo-mark"><Logo size={22} /></span>
             PulseLoop
           </a>
           <div className="nav-links">
@@ -193,6 +222,14 @@ function App() {
             <span className="nav-link">Pricing</span>
           </div>
           <div className="nav-right">
+            <button
+              className="theme-toggle"
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {theme === "dark" ? <Sun size={16} strokeWidth={2} /> : <Moon size={16} strokeWidth={2} />}
+            </button>
             <button className="nav-ghost">Sign in</button>
             <button className="nav-cta" onClick={scrollToFinal}>Join Waitlist</button>
           </div>
@@ -535,7 +572,7 @@ function App() {
         <div className="section-wrap">
           <div className="foot-grid">
             <div>
-              <div className="foot-brand"><Logo size={18} />PulseLoop</div>
+              <div className="foot-brand"><Logo size={20} />PulseLoop</div>
               <div className="foot-tagline">
                 Verified EU market intelligence for growth consultants and boutique agencies.
               </div>
