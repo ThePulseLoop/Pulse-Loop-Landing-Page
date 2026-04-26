@@ -1,51 +1,42 @@
 import React from "react";
 import { scrollToFinal } from "./hooks";
-
-const CARDS = [
-  {
-    id: "a1",
-    pillClass: "ap-green",
-    pillText: "Most Popular",
-    name: "The Solo Consultant",
-    tagline: "You are your own research team. You need to sound like you have five.",
-    items: [
-      "Cited reports your clients trust",
-      "20 minutes of research, not 6 hours",
-      "Intelligence that compounds with every client",
-    ],
-  },
-  {
-    id: "a2",
-    pillClass: "ap-yellow",
-    pillText: "Agencies Welcome",
-    name: "The Boutique Agency",
-    tagline: "You manage 6 client accounts. Each one deserves its own briefing room.",
-    items: [
-      "Separate intelligence workspace per client",
-      "White-label report sharing",
-      "One subscription, multiple clients covered",
-    ],
-  },
-];
+import { useT } from "./i18n";
 
 export default function Audience() {
+  const { t } = useT();
+  const cards = [
+    {
+      id: "a1",
+      pillClass: "ap-green",
+      pillKey: "aud.solo.pill",
+      nameKey: "aud.solo.name",
+      tagKey: "aud.solo.tag",
+      itemKeys: ["aud.solo.i1", "aud.solo.i2", "aud.solo.i3"],
+    },
+    {
+      id: "a2",
+      pillClass: "ap-yellow",
+      pillKey: "aud.agency.pill",
+      nameKey: "aud.agency.name",
+      tagKey: "aud.agency.tag",
+      itemKeys: ["aud.agency.i1", "aud.agency.i2", "aud.agency.i3"],
+    },
+  ];
   return (
     <section id="audience">
       <div className="section-wrap">
-        <h2 className="aud-top-h">Built for the consultant who can't afford to be wrong.</h2>
-        <p className="aud-top-sub">
-          Whether you work alone or run a small agency, PulseLoop gives you the research infrastructure that was only available to enterprise teams.
-        </p>
+        <h2 className="aud-top-h">{t("aud.h")}</h2>
+        <p className="aud-top-sub">{t("aud.sub")}</p>
         <div className="aud-grid">
-          {CARDS.map((c) => (
+          {cards.map((c) => (
             <div className="aud-card" id={c.id} key={c.id}>
-              <span className={`aud-pill ${c.pillClass}`}>{c.pillText}</span>
-              <div className="aud-name">{c.name}</div>
-              <p className="aud-tagline">{c.tagline}</p>
+              <span className={`aud-pill ${c.pillClass}`}>{t(c.pillKey)}</span>
+              <div className="aud-name">{t(c.nameKey)}</div>
+              <p className="aud-tagline">{t(c.tagKey)}</p>
               <ul className="aud-list">
-                {c.items.map((it) => (<li key={it}>{it}</li>))}
+                {c.itemKeys.map((k) => (<li key={k}>{t(k)}</li>))}
               </ul>
-              <button className="aud-join" onClick={scrollToFinal}>Join waitlist →</button>
+              <button className="aud-join" onClick={scrollToFinal}>{t("aud.join")}</button>
             </div>
           ))}
         </div>

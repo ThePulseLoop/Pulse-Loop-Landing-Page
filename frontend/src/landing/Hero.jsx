@@ -1,8 +1,10 @@
 import React, { useRef } from "react";
 import { HERO_FOCUS_DELAY_MS } from "./constants";
 import { submitWaitlist, useHeroCanvas } from "./hooks";
+import { useT } from "./i18n";
 
 function HeroProductCard() {
+  const { t } = useT();
   return (
     <div className="hero-visual">
       <div className="hero-card">
@@ -10,8 +12,8 @@ function HeroProductCard() {
           <div className="hc-dot" style={{ background: "#FF5F57" }} />
           <div className="hc-dot" style={{ background: "#FEBC2E" }} />
           <div className="hc-dot" style={{ background: "#28C840" }} />
-          <div className="hc-title">PulseLoop Intelligence</div>
-          <div className="hc-badge">Live</div>
+          <div className="hc-title">{t("hero.card.brand")}</div>
+          <div className="hc-badge">{t("hero.card.live")}</div>
         </div>
         <div className="hc-body">
           <div className="hc-sidebar">
@@ -22,57 +24,57 @@ function HeroProductCard() {
                 <rect x="2" y="9" width="5" height="5" />
                 <rect x="9" y="9" width="5" height="5" />
               </svg>
-              Signal Brief
+              {t("hero.card.nav.brief")}
             </div>
             <div className="hc-nav-item">
               <svg className="hc-nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <circle cx="8" cy="8" r="6" />
                 <path d="M8 5v3l2 2" />
               </svg>
-              History
+              {t("hero.card.nav.history")}
             </div>
             <div className="hc-nav-item">
               <svg className="hc-nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M2 12h12M2 8h8M2 4h6" />
               </svg>
-              Reports
+              {t("hero.card.nav.reports")}
             </div>
             <div className="hc-nav-item">
               <svg className="hc-nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M8 2v12M2 8l6 6 6-6" />
               </svg>
-              Certificate
+              {t("hero.card.nav.cert")}
             </div>
           </div>
           <div className="hc-main">
-            <div className="hc-report-title">French SaaS HR Tech — Q2 2026</div>
-            <div className="hc-report-sub">DACH Market Brief · 847 signals · Generated 14 Apr 2026</div>
+            <div className="hc-report-title">{t("hero.card.report.title")}</div>
+            <div className="hc-report-sub">{t("hero.card.report.sub")}</div>
             <div className="hc-chips">
-              <span className="hc-chip hc-chip-v">● Verified</span>
-              <span className="hc-chip hc-chip-v">High Confidence</span>
-              <span className="hc-chip hc-chip-d">FR · DACH · Nordics</span>
-              <span className="hc-chip hc-chip-d">23 Sources</span>
+              <span className="hc-chip hc-chip-v">{t("hero.card.chip.verified")}</span>
+              <span className="hc-chip hc-chip-v">{t("hero.card.chip.high")}</span>
+              <span className="hc-chip hc-chip-d">{t("hero.card.chip.geo")}</span>
+              <span className="hc-chip hc-chip-d">{t("hero.card.chip.sources")}</span>
             </div>
             <div className="hc-signal-rows">
               <div className="hc-sig">
                 <div className="hc-sig-bar" style={{ background: "var(--green)" }} />
                 <div className="hc-sig-txt">
-                  <strong>Lucca raises €15M Series B to expand into DACH</strong>
-                  Key competitor expanding into your primary market. Funding announced via BFM Business.
+                  <strong>{t("hero.card.sig1.title")}</strong>
+                  {t("hero.card.sig1.body")}
                 </div>
               </div>
               <div className="hc-sig">
                 <div className="hc-sig-bar" style={{ background: "var(--yellow)" }} />
                 <div className="hc-sig-txt">
-                  <strong>New EU AI Act obligations for HR software — March 2026</strong>
-                  Regulatory signal affecting all SaaS HR vendors selling in EU. Source: Official EU Journal.
+                  <strong>{t("hero.card.sig2.title")}</strong>
+                  {t("hero.card.sig2.body")}
                 </div>
               </div>
               <div className="hc-sig">
                 <div className="hc-sig-bar" style={{ background: "#60A5FA" }} />
                 <div className="hc-sig-txt">
-                  <strong>Personio Q1 2026 product update: AI-powered workforce planning</strong>
-                  Feature parity risk. Signal from Personio Engineering Blog.
+                  <strong>{t("hero.card.sig3.title")}</strong>
+                  {t("hero.card.sig3.body")}
                 </div>
               </div>
             </div>
@@ -91,6 +93,7 @@ export default function Hero() {
   const heroEmailRef = useRef(null);
   const heroFormRowRef = useRef(null);
   const hfMicroRef = useRef(null);
+  const { t } = useT();
 
   useHeroCanvas(canvasRef);
 
@@ -119,29 +122,27 @@ export default function Hero() {
       <div className="hero-top">
         <div className="hero-intro">
           <span className="hero-intro-dot" />
-          Introducing PulseLoop
+          {t("hero.intro")}
         </div>
         <h1 className="hero-h1">
-          <span className="norm">The briefing room</span>
-          <span className="ital">your competitors don't have.</span>
+          <span className="norm">{t("hero.h1.norm")}</span>
+          <span className="ital">{t("hero.h1.ital")}</span>
         </h1>
-        <p className="hero-sub">
-          Verified EU market intelligence for growth consultants. Every claim source-cited. Every report client-ready.
-        </p>
+        <p className="hero-sub">{t("hero.sub")}</p>
 
         <div className="hero-actions" id="hero-actions" ref={heroActionsRef}>
-          <button className="btn-y" onClick={openForm}>✛ &nbsp;Join the Waitlist</button>
+          <button className="btn-y" onClick={openForm}>✛ &nbsp;{t("hero.cta.primary")}</button>
         </div>
         <div className="hero-form-wrap" id="hero-form-wrap" ref={heroFormRef}>
           <div className="hero-form-row" ref={heroFormRowRef}>
             <input
               className="hf-input"
               type="email"
-              placeholder="your@email.com"
+              placeholder={t("hero.email.placeholder")}
               ref={heroEmailRef}
               onKeyDown={(e) => e.key === "Enter" && submit()}
             />
-            <button className="hf-submit" onClick={submit}>Get Access</button>
+            <button className="hf-submit" onClick={submit}>{t("hero.cta.access")}</button>
           </div>
           <div className="hf-success" ref={heroSuccessRef}>
             <div className="hf-s-icon">
@@ -149,9 +150,9 @@ export default function Hero() {
                 <polyline points="2,6 5,9 10,3" />
               </svg>
             </div>
-            <span className="hf-s-txt">You're on the list — we'll be in touch.</span>
+            <span className="hf-s-txt">{t("hero.success")}</span>
           </div>
-          <p className="hf-micro" ref={hfMicroRef}>Early access. No credit card. EU-based.</p>
+          <p className="hf-micro" ref={hfMicroRef}>{t("hero.micro")}</p>
         </div>
       </div>
       <HeroProductCard />

@@ -1,13 +1,23 @@
 import React from "react";
+import { useT } from "./i18n";
 
 export default function TrustStrip() {
+  const { t } = useT();
+  const items = [
+    "trust.france",
+    "trust.germany",
+    "trust.netherlands",
+    "trust.sweden",
+    "trust.austria",
+    "trust.belgium",
+  ];
   return (
     <div id="trust">
       <div className="trust-inner">
-        <span className="trust-label">Trusted by consultants across</span>
+        <span className="trust-label">{t("trust.label")}</span>
         <div className="trust-items">
-          {["France", "Germany", "Netherlands", "Sweden", "Austria", "Belgium"].map((c) => (
-            <span key={c} className="trust-item">{c}</span>
+          {items.map((k) => (
+            <span key={k} className="trust-item">{t(k)}</span>
           ))}
         </div>
       </div>

@@ -1,10 +1,12 @@
 import React, { useRef, useState } from "react";
 import { submitWaitlist } from "./hooks";
+import { useT } from "./i18n";
 
 export default function FinalCTA() {
   const [email, setEmail] = useState("");
   const fiFormAreaRef = useRef(null);
   const fiSuccessRef = useRef(null);
+  const { t } = useT();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,22 +21,22 @@ export default function FinalCTA() {
     <section id="final">
       <div className="section-wrap">
         <div className="close-line" id="close-line">
-          <span className="cl-1">A briefing room</span>
-          <span className="cl-2">that never sleeps.</span>
+          <span className="cl-1">{t("final.cl1")}</span>
+          <span className="cl-2">{t("final.cl2")}</span>
         </div>
-        <h2 className="final-h">Be among the first consultants in.</h2>
+        <h2 className="final-h">{t("final.h")}</h2>
         <div className="final-wrap">
           <div ref={fiFormAreaRef} className="fi-row-wrap">
             <form className="final-row" onSubmit={handleSubmit}>
               <input
                 className="fi-input"
                 type="email"
-                placeholder="your@email.com"
+                placeholder={t("hero.email.placeholder")}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
-              <button className="fi-submit" type="submit">✛ &nbsp;Get Early Access</button>
+              <button className="fi-submit" type="submit">{t("final.cta")}</button>
             </form>
           </div>
           <div className="fi-success" ref={fiSuccessRef}>
@@ -43,10 +45,10 @@ export default function FinalCTA() {
                 <polyline points="4,12 10,18 20,6" />
               </svg>
             </div>
-            <div className="fi-success-h">You're on the list.</div>
-            <div className="fi-success-s">Early access · We'll be in touch</div>
+            <div className="fi-success-h">{t("final.success.h")}</div>
+            <div className="fi-success-s">{t("final.success.s")}</div>
           </div>
-          <p className="fi-micro">Early access · EU-based · Built for the way you work</p>
+          <p className="fi-micro">{t("final.micro")}</p>
         </div>
       </div>
     </section>

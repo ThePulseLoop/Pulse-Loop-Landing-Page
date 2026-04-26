@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import axios from "axios";
 import { toast } from "sonner";
+import { tStatic } from "./i18n";
 import {
   API,
   CERT_LINE_STAGGER_MS,
@@ -201,20 +202,19 @@ export async function submitWaitlist(email, source) {
   try {
     const res = await axios.post(`${API}/waitlist`, { email, source });
     if (res.data?.status === "duplicate") {
-      toast("Already on the list", {
-        description:
-          "Your email has already been submitted, we will get back to you soon.",
+      toast(tStatic("toast.dup.title"), {
+        description: tStatic("toast.dup.body"),
       });
       return "duplicate";
     }
-    toast("Thank you for joining the waiting list!", {
-      description: "We will get back to you soon.",
+    toast(tStatic("toast.ok.title"), {
+      description: tStatic("toast.ok.body"),
     });
     return "joined";
   } catch (err) {
     const detail = err?.response?.data?.detail;
-    toast.error("Could not submit", {
-      description: detail || "Something went wrong. Please try again.",
+    toast.error(tStatic("toast.err.title"), {
+      description: detail || tStatic("toast.err.body"),
     });
     return "error";
   }
