@@ -14,6 +14,91 @@ import {
   PARTICLE_YELLOW_PROB,
 } from "./constants";
 
+// ── Canvas helpers (pure, complexity ≤ 6 each) ────────────────
+
+function buildParticles(width, height) {
+  const count = Math.min(
+    PARTICLE_MAX_NODES,
+    Math.floor((width * height) / PARTICLE_AREA_PER_NODE)
+  );
+  return Array.from({ length: count }, () => ({
+    x: Math.random() * width,
+    y: Math.random() * height,
+    vx: (Math.random() - 0.5) * 0.2,
+    vy: (Math.random() - 0.5) * 0.2,
+    r: 1.5 + Math.random() * 2.5,
+    phase: Math.random() * Math.PI * 2,
+    sp: 0.008 + Math.random() * 0.012,
+    yellow: Math.random() < PARTICLE_YELLOW_PROB,
+  }));
+}
+
+function getThemePalette() {
+  const isLight = document.documentElement.getAttribute("data-theme") === "light";
+  return {
+    isLight,
+    greenRGB: isLight ? "0,162,108" : "46,232,160",
+    yellowRGB: isLight ? "163,166,0" : "231,236,12",
+    lineAlphaMul: isLight ? 0.18 : 0.1,
+    fillAlphaMul: isLight ? 0.85 : 0.75,
+    nodeGlowAlpha: isLight ? 0.18 : 0.2,
+  };
+}
+
+function drawLink(ctx, a, b, linkRadius, greenRGB, lineAlphaMul) {
+  const dx = a.x - b.x;
+  const dy = a.y - b.y;
+  const distance = Math.sqrt(dx * dx + dy * dy);
+  if (distance >= linkRadius) return;
+  ctx.beginPath();
+  ctx.moveTo(a.x, a.y);
+  ctx.lineTo(b.x, b.y);
+  ctx.strokeStyle = `rgba(${greenRGB},${(1 - distance / linkRadius) * lineAlphaMul})`;
+  ctx.lineWidth = 0.6;
+  ctx.stroke();
+}
+
+function drawAllLinks(ctx, nodes, linkRadius, palette) {
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      drawLink(ctx, nodes[i], nodes[j], linkRadius, palette.greenRGB, palette.lineAlphaMul);
+    }
+  }
+}
+
+function bounceOnEdge(node, width, height) {
+  node.x += node.vx;
+  node.y += node.vy;
+  if (node.x < 0 || node.x > width) node.vx *= -1;
+  if (node.y < 0 || node.y > height) node.vy *= -1;
+}
+
+function drawNode(ctx, node, palette) {
+  node.phase += node.sp;
+  const radius = node.r + Math.sin(node.phase) * 1.2;
+  const colorRGB = node.yellow ? palette.yellowRGB : palette.greenRGB;
+  const grad = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, radius * 5);
+  grad.addColorStop(0, `rgba(${colorRGB},${palette.nodeGlowAlpha})`);
+  grad.addColorStop(1, `rgba(${colorRGB},0)`);
+  ctx.beginPath();
+  ctx.arc(node.x, node.y, radius * 5, 0, Math.PI * 2);
+  ctx.fillStyle = grad;
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
+  ctx.fillStyle = `rgba(${colorRGB},${palette.fillAlphaMul})`;
+  ctx.fill();
+}
+
+function drawAllNodes(ctx, nodes, width, height, palette) {
+  for (const node of nodes) {
+    drawNode(ctx, node, palette);
+    bounceOnEdge(node, width, height);
+  }
+}
+
+// ── Hooks ────────────────────────────────────────────────────
+
 // Force light theme on the document root.
 export function useForceLightTheme() {
   useEffect(() => {
@@ -38,88 +123,24 @@ export function useNavScrollState(navRef) {
 export function useHeroCanvas(canvasRef) {
   useEffect(() => {
     const cv = canvasRef.current;
-    if (!cv) return;
-    const cx = cv.getContext("2d");
-    let W = 0;
-    let H = 0;
+    if (!cv) return undefined;
+    const ctx = cv.getContext("2d");
+    let width = 0;
+    let height = 0;
     let nodes = [];
     let raf = 0;
 
-    const buildNodes = () => {
-      const N = Math.min(
-        PARTICLE_MAX_NODES,
-        Math.floor((W * H) / PARTICLE_AREA_PER_NODE)
-      );
-      nodes = Array.from({ length: N }, () => ({
-        x: Math.random() * W,
-        y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.2,
-        vy: (Math.random() - 0.5) * 0.2,
-        r: 1.5 + Math.random() * 2.5,
-        phase: Math.random() * Math.PI * 2,
-        sp: 0.008 + Math.random() * 0.012,
-        yellow: Math.random() < PARTICLE_YELLOW_PROB,
-      }));
-    };
-
     const resize = () => {
-      W = cv.width = cv.offsetWidth;
-      H = cv.height = cv.offsetHeight;
-      buildNodes();
-    };
-
-    const drawLinks = (linkRadius, greenRGB, lineAlphaMul) => {
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const a = nodes[i];
-          const b = nodes[j];
-          const dx = a.x - b.x;
-          const dy = a.y - b.y;
-          const d = Math.sqrt(dx * dx + dy * dy);
-          if (d < linkRadius) {
-            cx.beginPath();
-            cx.moveTo(a.x, a.y);
-            cx.lineTo(b.x, b.y);
-            cx.strokeStyle = `rgba(${greenRGB},${(1 - d / linkRadius) * lineAlphaMul})`;
-            cx.lineWidth = 0.6;
-            cx.stroke();
-          }
-        }
-      }
-    };
-
-    const drawNodes = (greenRGB, yellowRGB, isLight, fillAlphaMul) => {
-      for (const n of nodes) {
-        n.phase += n.sp;
-        const r = n.r + Math.sin(n.phase) * 1.2;
-        const col = n.yellow ? yellowRGB : greenRGB;
-        const grad = cx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 5);
-        grad.addColorStop(0, `rgba(${col},${isLight ? 0.18 : 0.2})`);
-        grad.addColorStop(1, `rgba(${col},0)`);
-        cx.beginPath();
-        cx.arc(n.x, n.y, r * 5, 0, Math.PI * 2);
-        cx.fillStyle = grad;
-        cx.fill();
-        cx.beginPath();
-        cx.arc(n.x, n.y, r, 0, Math.PI * 2);
-        cx.fillStyle = `rgba(${col},${fillAlphaMul})`;
-        cx.fill();
-        n.x += n.vx;
-        n.y += n.vy;
-        if (n.x < 0 || n.x > W) n.vx *= -1;
-        if (n.y < 0 || n.y > H) n.vy *= -1;
-      }
+      width = cv.width = cv.offsetWidth;
+      height = cv.height = cv.offsetHeight;
+      nodes = buildParticles(width, height);
     };
 
     const tick = () => {
-      cx.clearRect(0, 0, W, H);
-      const isLight = document.documentElement.getAttribute("data-theme") === "light";
-      const greenRGB = isLight ? "0,162,108" : "46,232,160";
-      const yellowRGB = isLight ? "163,166,0" : "231,236,12";
-      const lineAlphaMul = isLight ? 0.18 : 0.1;
-      const fillAlphaMul = isLight ? 0.85 : 0.75;
-      drawLinks(W * PARTICLE_LINK_RATIO, greenRGB, lineAlphaMul);
-      drawNodes(greenRGB, yellowRGB, isLight, fillAlphaMul);
+      ctx.clearRect(0, 0, width, height);
+      const palette = getThemePalette();
+      drawAllLinks(ctx, nodes, width * PARTICLE_LINK_RATIO, palette);
+      drawAllNodes(ctx, nodes, width, height, palette);
       raf = requestAnimationFrame(tick);
     };
 
