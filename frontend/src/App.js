@@ -1,5 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import { Toaster, toast } from "sonner";
 import "./App.css";
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
 
 const Logo = ({ size = 22 }) => (
   <svg
@@ -183,26 +188,53 @@ function App() {
     setTimeout(() => heroEmailRef.current?.focus(), 60);
   };
 
-  const submitHero = () => {
+  const submitWaitlist = async (email, source) => {
+    try {
+      const res = await axios.post(`${API}/waitlist`, { email, source });
+      if (res.data?.status === "duplicate") {
+        toast("Already on the list", {
+          description: "Your email has already been submitted, we will get back to you soon.",
+        });
+        return "duplicate";
+      }
+      toast("Thank you for joining the waiting list!", {
+        description: "We will get back to you soon.",
+      });
+      return "joined";
+    } catch (err) {
+      const detail = err?.response?.data?.detail;
+      toast.error("Could not submit", {
+        description: detail || "Something went wrong. Please try again.",
+      });
+      return "error";
+    }
+  };
+
+  const submitHero = async () => {
     const v = heroEmailRef.current?.value.trim();
     if (!v || !v.includes("@")) {
       heroEmailRef.current?.focus();
       return;
     }
+    const result = await submitWaitlist(v, "hero");
+    if (result === "error") return;
     if (heroFormRowRef.current) heroFormRowRef.current.style.display = "none";
     if (hfMicroRef.current) hfMicroRef.current.style.display = "none";
     heroSuccessRef.current?.classList.add("show");
   };
 
-  const submitFinal = (e) => {
+  const submitFinal = async (e) => {
     e.preventDefault();
     if (!finalEmail || !finalEmail.includes("@")) return;
+    const result = await submitWaitlist(finalEmail, "final");
+    if (result === "error") return;
     if (fiFormAreaRef.current) fiFormAreaRef.current.style.display = "none";
     fiSuccessRef.current?.classList.add("show");
   };
 
   return (
     <div className="App">
+      <Toaster position="top-center" richColors closeButton theme="light" />
       {/* NAV */}
       <nav id="nav" ref={navRef}>
         <div className="nav-w">
