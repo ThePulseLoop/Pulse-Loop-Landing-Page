@@ -54,8 +54,13 @@ def main():
         return
 
     print("[init_db] ⚠️  `waitlist` table not found.")
-    print("[init_db] Please run this SQL ONCE in your Supabase SQL editor:")
-    print("https://supabase.com/dashboard/project/omippgcigowvguslgwue/sql/new")
+    print("[init_db] Please run this SQL ONCE in your Supabase SQL editor.")
+    try:
+        project_ref = SUPABASE_URL.split("//")[1].split(".")[0]
+        print(f"[init_db] {SUPABASE_URL.rstrip('/')} → SQL Editor: "
+              f"https://supabase.com/dashboard/project/{project_ref}/sql/new")
+    except Exception:
+        pass
     print("=" * 70)
     print(CREATE_SQL)
     print("=" * 70)
