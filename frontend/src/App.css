@@ -112,7 +112,7 @@ button,input{font-family:inherit;}
 .nav-cta{
   height:44px;padding:0 22px;
   background:#0A0A10;color:#F0F0EC;
-  border:none;border-radius:999px;
+  border:none;border-radius:10px;
   font-family:var(--font-f);font-size:11px;font-weight:700;
   letter-spacing:0.09em;text-transform:uppercase;
   cursor:pointer;
@@ -516,10 +516,10 @@ button,input{font-family:inherit;}
 [data-theme="light"] #nav.scrolled{background:transparent;border-color:transparent;}
 [data-theme="light"] .nav-cta:hover{background:#1A1A28;}
 
-/* Hero CTA buttons → pill, lime accent */
-[data-theme="light"] .btn-y{background:var(--logo);color:#0A0A10;border-radius:999px;height:54px;padding:0 32px;}
+/* Hero CTA buttons → rounded rect */
+[data-theme="light"] .btn-y{background:var(--logo);color:#0A0A10;border-radius:12px;height:54px;padding:0 32px;}
 [data-theme="light"] .btn-y:hover{background:#BCBE00;opacity:1;}
-[data-theme="light"] .btn-g{border-radius:999px;height:54px;padding:0 28px;background:var(--bg2);color:#0A0A10;border-color:var(--bdr2);}
+[data-theme="light"] .btn-g{border-radius:12px;height:54px;padding:0 28px;background:var(--bg2);color:#0A0A10;border-color:var(--bdr2);}
 [data-theme="light"] .btn-g:hover{border-color:#0A0A10;color:#0A0A10;}
 
 /* Hero italic — keep readable green */
@@ -634,7 +634,7 @@ button,input{font-family:inherit;}
 
 [data-theme="light"] #final .final-row{
   background:transparent;
-  border-radius:999px;
+  border-radius:12px;
   padding:0;
   max-width:460px;
 }
@@ -642,7 +642,7 @@ button,input{font-family:inherit;}
   background:rgba(255,255,255,0.06);
   border:1px solid rgba(255,255,255,0.14);
   color:#F0F0EC;
-  border-radius:999px 0 0 999px;
+  border-radius:12px 0 0 12px;
   height:54px;
   text-align:center;
 }
@@ -650,7 +650,7 @@ button,input{font-family:inherit;}
 [data-theme="light"] #final .fi-input:focus{border-color:rgba(209,213,1,0.5);}
 [data-theme="light"] #final .fi-submit{
   background:var(--logo);color:#0A0A10;
-  border-radius:0 999px 999px 0;
+  border-radius:0 12px 12px 0;
   height:54px;font-weight:700;
 }
 [data-theme="light"] #final .fi-submit:hover{background:#BCBE00;opacity:1;}
