@@ -462,63 +462,6 @@ function App() {
         </div>
       </section>
 
-      {/* SOCIAL PROOF / TESTIMONIALS */}
-      <section id="social">
-        <div className="section-wrap">
-          <h2 className="social-h" id="social-h">
-            The consultants who tried it early stopped hesitating before hitting send.
-          </h2>
-          <div className="testi-grid">
-            <div className="testi-card" id="t1">
-              <div className="testi-stats">
-                <div>
-                  <div className="testi-stat-num">−6h</div>
-                  <div className="testi-stat-lbl">per client per week</div>
-                </div>
-                <div>
-                  <div className="testi-stat-num">3×</div>
-                  <div className="testi-stat-lbl">more clients served</div>
-                </div>
-              </div>
-              <div>
-                <p className="testi-quote">
-                  "Finally something built for the way I actually work. I used to spend
-                  half my Sunday verifying AI outputs before client calls. Now I attach
-                  the certificate and no one questions it."
-                </p>
-                <div className="testi-attr">
-                  <strong>Sarah Engel</strong>
-                  <span>Fractional CMO · Amsterdam</span>
-                </div>
-              </div>
-            </div>
-            <div className="testi-card" id="t2">
-              <div className="testi-stats">
-                <div>
-                  <div className="testi-stat-num">28%</div>
-                  <div className="testi-stat-lbl">higher client confidence</div>
-                </div>
-                <div>
-                  <div className="testi-stat-num">60+</div>
-                  <div className="testi-stat-lbl">EU sources covered</div>
-                </div>
-              </div>
-              <div>
-                <p className="testi-quote">
-                  "The EU-specific sourcing is what sold me. Every other tool pulled US
-                  data and relabelled it. PulseLoop understands that DACH and Nordic
-                  markets need their own signals."
-                </p>
-                <div className="testi-attr">
-                  <strong>Marcus Holst</strong>
-                  <span>GTM Advisor · Berlin</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* WHO IT'S FOR */}
       <section id="audience">
         <div className="section-wrap">
