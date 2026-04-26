@@ -538,8 +538,8 @@ function App() {
       <section id="final">
         <div className="section-wrap">
           <div className="close-line" id="close-line">
-            <span className="cl-1">Verified. EU-specific.</span>
-            <span className="cl-2">Yours.</span>
+            <span className="cl-1">A briefing room</span>
+            <span className="cl-2">that never sleeps.</span>
           </div>
           <h2 className="final-h">Be among the first consultants in.</h2>
           <div className="final-wrap">
