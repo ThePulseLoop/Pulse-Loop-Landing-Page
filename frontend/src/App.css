@@ -183,7 +183,7 @@ button,input{font-family:inherit;}
   position:relative;z-index:2;
   text-align:center;
   padding:80px 40px 0;
-  max-width:900px;
+  max-width:1400px;
   width:100%;
 }
 .hero-intro{
@@ -201,8 +201,8 @@ button,input{font-family:inherit;}
   margin-bottom:8px;
   opacity:0;animation:up 700ms 220ms var(--ease) both;
 }
-.hero-h1 .norm{display:block;color:var(--txt);font-weight:600;}
-.hero-h1 .ital{display:block;font-style:italic;color:var(--green);font-weight:700;font-size:clamp(40px,6.4vw,86px);}
+.hero-h1 .norm{display:block;color:var(--txt);font-weight:600;white-space:nowrap;}
+.hero-h1 .ital{display:block;font-style:italic;color:var(--green);font-weight:700;font-size:clamp(40px,6.4vw,86px);white-space:nowrap;}
 .hero-sub{
   font-family:var(--font-b);
   font-size:clamp(15px,1.8vw,19px);line-height:1.7;
