@@ -574,6 +574,7 @@ button,input{font-family:inherit;}
   color:#F0F0EC;
   border-radius:999px 0 0 999px;
   height:54px;
+  text-align:center;
 }
 [data-theme="light"] #final .fi-input::placeholder{color:rgba(240,240,236,0.45);}
 [data-theme="light"] #final .fi-input:focus{border-color:rgba(209,213,1,0.5);}
