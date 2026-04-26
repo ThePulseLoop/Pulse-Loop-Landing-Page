@@ -207,7 +207,7 @@ function App() {
       <nav id="nav" ref={navRef}>
         <div className="nav-w">
           <a href="#" className="nav-logo" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
-            <span className="nav-logo-mark"><Logo size={22} /></span>
+            <span className="nav-logo-mark"><Logo size={30} /></span>
             PulseLoop
           </a>
           <div className="nav-links">
