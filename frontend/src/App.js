@@ -537,10 +537,13 @@ function App() {
       {/* CLOSING + FINAL CTA */}
       <section id="final">
         <div className="section-wrap">
-          <div className="close-line" id="close-line">Verified. EU-specific. Yours.</div>
+          <div className="close-line" id="close-line">
+            <span className="cl-1">Verified. EU-specific.</span>
+            <span className="cl-2">Yours.</span>
+          </div>
           <h2 className="final-h">Be among the first consultants in.</h2>
           <div className="final-wrap">
-            <div ref={fiFormAreaRef}>
+            <div ref={fiFormAreaRef} className="fi-row-wrap">
               <form className="final-row" onSubmit={submitFinal}>
                 <input
                   className="fi-input"
@@ -552,6 +555,9 @@ function App() {
                 />
                 <button className="fi-submit" type="submit">✛ &nbsp;Get Early Access</button>
               </form>
+              <button type="button" className="fi-secondary" onClick={scrollToFinal}>
+                Schedule a Demo
+              </button>
             </div>
             <div className="fi-success" ref={fiSuccessRef}>
               <div className="fi-big-check">
