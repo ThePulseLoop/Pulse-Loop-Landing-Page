@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Sun, Moon } from "lucide-react";
 import "./App.css";
 
 const Logo = ({ size = 22 }) => (
@@ -32,20 +31,15 @@ function App() {
   const certCardRef = useRef(null);
 
   const [finalEmail, setFinalEmail] = useState("");
-  const [theme, setTheme] = useState(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("pl-theme") || "dark";
-    }
-    return "dark";
-  });
 
-  // Apply theme to <html>
+  // Force light theme always
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("pl-theme", theme);
-  }, [theme]);
+    document.documentElement.setAttribute("data-theme", "light");
+  }, []);
 
-  const toggleTheme = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
+  const scrollToId = (id) => () => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   // Nav scroll
   useEffect(() => {
@@ -212,25 +206,16 @@ function App() {
       {/* NAV */}
       <nav id="nav" ref={navRef}>
         <div className="nav-w">
-          <a href="#" className="nav-logo">
+          <a href="#" className="nav-logo" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
             <span className="nav-logo-mark"><Logo size={22} /></span>
             PulseLoop
           </a>
           <div className="nav-links">
-            <span className="nav-link">Intelligence</span>
-            <span className="nav-link">Methodology</span>
-            <span className="nav-link">Pricing</span>
+            <span className="nav-link" onClick={scrollToId("f1")}>Hypothesis</span>
+            <span className="nav-link" onClick={scrollToId("f2")}>Intelligence</span>
+            <span className="nav-link" onClick={scrollToId("f3")}>Methodology</span>
           </div>
           <div className="nav-right">
-            <button
-              className="theme-toggle"
-              onClick={toggleTheme}
-              aria-label="Toggle theme"
-              title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-            >
-              {theme === "dark" ? <Sun size={16} strokeWidth={2} /> : <Moon size={16} strokeWidth={2} />}
-            </button>
-            <button className="nav-ghost">Sign in</button>
             <button className="nav-cta" onClick={scrollToFinal}>Join Waitlist</button>
           </div>
         </div>
@@ -255,7 +240,6 @@ function App() {
 
           <div className="hero-actions" id="hero-actions" ref={heroActionsRef}>
             <button className="btn-y" onClick={openHeroForm}>✛ &nbsp;Join the Waitlist</button>
-            <button className="btn-g">See how it works</button>
           </div>
           <div className="hero-form-wrap" id="hero-form-wrap" ref={heroFormRef}>
             <div className="hero-form-row" ref={heroFormRowRef}>
@@ -555,9 +539,6 @@ function App() {
                 />
                 <button className="fi-submit" type="submit">✛ &nbsp;Get Early Access</button>
               </form>
-              <button type="button" className="fi-secondary" onClick={scrollToFinal}>
-                Schedule a Demo
-              </button>
             </div>
             <div className="fi-success" ref={fiSuccessRef}>
               <div className="fi-big-check">
