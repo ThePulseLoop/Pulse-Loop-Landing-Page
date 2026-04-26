@@ -6,11 +6,31 @@ import "./App.css";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
-const Logo = ({ size = 22 }) => (
+// ── Logo & layout constants ───────────────────────────────────
+const LOGO_DEFAULT_SIZE = 22;
+const LOGO_NAV_SIZE = 30;
+const LOGO_FOOTER_SIZE = 20;
+const LOGO_VIEWBOX_W = 400;
+const LOGO_VIEWBOX_H = 333;
+
+// ── Hero canvas particle network constants ───────────────────
+const PARTICLE_MAX_NODES = 30;
+const PARTICLE_AREA_PER_NODE = 25000;
+const PARTICLE_LINK_RATIO = 0.22;
+const PARTICLE_YELLOW_PROB = 0.1;
+
+// ── Animation timing constants ───────────────────────────────
+const CERT_LINE_STAGGER_MS = 110;
+const HERO_FOCUS_DELAY_MS = 60;
+const NAV_SCROLL_THRESHOLD_PX = 40;
+const IO_THRESHOLD_FEAT = 0.18;
+const IO_THRESHOLD_CERT = 0.3;
+
+const Logo = ({ size = LOGO_DEFAULT_SIZE }) => (
   <svg
     width={size}
-    height={(size * 333) / 400}
-    viewBox="0 0 400 333"
+    height={(size * LOGO_VIEWBOX_H) / LOGO_VIEWBOX_W}
+    viewBox={`0 0 ${LOGO_VIEWBOX_W} ${LOGO_VIEWBOX_H}`}
     xmlns="http://www.w3.org/2000/svg"
     aria-hidden
     style={{ flexShrink: 0 }}
@@ -50,10 +70,11 @@ function App() {
   useEffect(() => {
     const onScroll = () => {
       if (!navRef.current) return;
-      navRef.current.classList.toggle("scrolled", window.scrollY > 40);
+      navRef.current.classList.toggle("scrolled", window.scrollY > NAV_SCROLL_THRESHOLD_PX);
     };
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Hero canvas particle network
@@ -66,7 +87,7 @@ function App() {
 
     const build = () => {
       nodes = [];
-      const N = Math.min(30, Math.floor((W * H) / 25000));
+      const N = Math.min(PARTICLE_MAX_NODES, Math.floor((W * H) / PARTICLE_AREA_PER_NODE));
       for (let i = 0; i < N; i++) {
         nodes.push({
           x: Math.random() * W,
@@ -76,7 +97,7 @@ function App() {
           r: 1.5 + Math.random() * 2.5,
           phase: Math.random() * Math.PI * 2,
           sp: 0.008 + Math.random() * 0.012,
-          yellow: Math.random() < 0.1,
+          yellow: Math.random() < PARTICLE_YELLOW_PROB,
         });
       }
     };
@@ -94,7 +115,7 @@ function App() {
       const yellowRGB = isLight ? "163,166,0" : "231,236,12";
       const lineAlphaMul = isLight ? 0.18 : 0.1;
       const fillAlphaMul = isLight ? 0.85 : 0.75;
-      const LINK = W * 0.22;
+      const LINK = W * PARTICLE_LINK_RATIO;
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const a = nodes[i], b = nodes[j];
@@ -139,6 +160,8 @@ function App() {
       window.removeEventListener("resize", resize);
       cancelAnimationFrame(raf);
     };
+    // Mount-only effect: canvas is initialized once; node mutations are local.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Intersection observer for fade-ins
@@ -152,13 +175,15 @@ function App() {
           io.unobserve(e.target);
         });
       },
-      { threshold: 0.18 }
+      { threshold: IO_THRESHOLD_FEAT }
     );
     ids.forEach((id) => {
       const el = document.getElementById(id);
       if (el) io.observe(el);
     });
     return () => io.disconnect();
+    // Mount-only: observers attach once for static section ids.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Cert line-by-line reveal
@@ -168,14 +193,16 @@ function App() {
       (en) => {
         if (!en[0].isIntersecting) return;
         document.querySelectorAll(".cert2-line").forEach((l, i) => {
-          setTimeout(() => l.classList.add("on"), i * 110);
+          setTimeout(() => l.classList.add("on"), i * CERT_LINE_STAGGER_MS);
         });
         certIO.disconnect();
       },
-      { threshold: 0.3 }
+      { threshold: IO_THRESHOLD_CERT }
     );
     certIO.observe(certCardRef.current);
     return () => certIO.disconnect();
+    // Mount-only: certCardRef is stable across renders.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const scrollToFinal = () => {
@@ -185,7 +212,7 @@ function App() {
   const openHeroForm = () => {
     if (heroActionsRef.current) heroActionsRef.current.style.display = "none";
     heroFormRef.current?.classList.add("open");
-    setTimeout(() => heroEmailRef.current?.focus(), 60);
+    setTimeout(() => heroEmailRef.current?.focus(), HERO_FOCUS_DELAY_MS);
   };
 
   const submitWaitlist = async (email, source) => {
@@ -239,7 +266,7 @@ function App() {
       <nav id="nav" ref={navRef}>
         <div className="nav-w">
           <a href="#" className="nav-logo" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
-            <span className="nav-logo-mark"><Logo size={30} /></span>
+            <span className="nav-logo-mark"><Logo size={LOGO_NAV_SIZE} /></span>
             PulseLoop
           </a>
           <div className="nav-links">
@@ -591,7 +618,7 @@ function App() {
         <div className="section-wrap">
           <div className="foot-grid">
             <div>
-              <div className="foot-brand"><Logo size={20} />PulseLoop</div>
+              <div className="foot-brand"><Logo size={LOGO_FOOTER_SIZE} />PulseLoop</div>
               <div className="foot-tagline">
                 Verified EU market intelligence for growth consultants and boutique agencies.
               </div>
