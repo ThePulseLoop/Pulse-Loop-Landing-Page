@@ -101,3 +101,98 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "Test the new POST /api/waitlist endpoint integrated with Supabase"
+
+backend:
+  - task: "POST /api/waitlist endpoint - New email submission"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ New email submission test passed. POST /api/waitlist with unique email returns HTTP 200 with status 'joined' and correct data structure including Supabase row ID, email, source, and timestamp."
+
+  - task: "POST /api/waitlist endpoint - Duplicate email handling"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ Duplicate email handling test passed. Submitting the same email twice returns HTTP 200 with status 'duplicate' as expected."
+
+  - task: "POST /api/waitlist endpoint - Email validation"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ Email validation test passed. Invalid email format returns HTTP 422 with proper Pydantic validation error. Missing email field also returns HTTP 422 as expected."
+
+  - task: "POST /api/waitlist endpoint - Source field handling"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ Source field handling test passed. Different source values ('hero', 'final') are correctly stored and returned in the response data."
+
+  - task: "Supabase integration verification"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ Supabase integration verification passed. All test emails were successfully inserted into the Supabase waitlist table and can be queried back with correct email, source, and timestamp data."
+
+  - task: "Pre-existing endpoints compatibility"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ Pre-existing endpoints compatibility verified. GET /api/ returns 'Hello World' message and GET /api/status returns empty array, both working correctly."
+
+frontend:
+  # No frontend testing required for this task
+
+metadata:
+  created_by: "testing_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "All waitlist endpoint tests completed successfully"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+    - agent: "testing"
+      message: "Comprehensive testing of POST /api/waitlist endpoint completed successfully. All 6 test cases passed: new email submission, duplicate handling, email validation, source field handling, Supabase integration verification, and pre-existing endpoints compatibility. The endpoint is fully functional and ready for production use."
