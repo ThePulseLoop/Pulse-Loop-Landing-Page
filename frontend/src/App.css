@@ -718,6 +718,23 @@ button,input{font-family:inherit;}
 [data-theme="light"] #final .fi-big-check svg{stroke:#0A0A10;}
 [data-theme="light"] #final .fi-success-s{color:var(--logo);}
 
+@media (max-width: 500px) {
+  #final .final-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  #final .fi-input {
+    border-radius: 12px !important;
+    border-right: 1px solid rgba(255,255,255,0.14) !important;
+    width: 100%;
+  }
+  #final .fi-submit {
+    border-radius: 12px !important;
+    width: 100%;
+  }
+}
+
+
 /* Hero form */
 [data-theme="light"] .hf-input{background:var(--bg);}
 [data-theme="light"] .hf-submit{background:var(--green);color:#FFFFFF;}
