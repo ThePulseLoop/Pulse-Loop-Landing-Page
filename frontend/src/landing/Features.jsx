@@ -89,7 +89,7 @@ function FeatureSection({ id, flip, tagKey, headingKey, bodyKey, ctaKey, visual 
   return (
     <section className="feat-section" id={id}>
       <div className="section-wrap">
-        <div className={`feat-grid ${flip ? "flip" : ""}`}>
+        <div className={`feat-grid grid grid-cols-1 sm:grid-cols-2 gap-12 sm:gap-20 items-center${flip ? " flip" : ""}`}>
           <div className="feat-copy">
             <div className="feat-tag">{t(tagKey)}</div>
             <h2 className="feat-h">{t(headingKey)}</h2>
