@@ -39,6 +39,12 @@ class WaitlistRequest(BaseModel):
 async def root():
     return {"message": "Hello World from Vercel Serverless!"}
 
+@api_router.get("/debug")
+async def debug():
+    url = SUPABASE_URL or "NOT SET"
+    # Only show the project ref (safe, not a secret)
+    return {"supabase_url_prefix": url[:40] if url else "NOT SET", "supabase_configured": supabase is not None}
+
 @api_router.post("/waitlist")
 async def join_waitlist(payload: WaitlistRequest):
     if supabase is None:
