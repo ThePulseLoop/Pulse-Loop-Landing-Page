@@ -765,3 +765,18 @@ button,input{font-family:inherit;}
 
 /* Replace hero ital weight slightly */
 [data-theme="light"] .hero-h1 .ital{font-weight:700;}
+
+/* Disable animations on cards for mobile to prevent flickering */
+@media (max-width: 768px) {
+  .prod-card,
+  .prod-card.glow,
+  .sig-card,
+  .sig-card-scan,
+  .cert-card2,
+  .pc-live::before,
+  .hc-badge::before,
+  .sig-new-badge::before,
+  .c2-pulse::before {
+    animation: none !important;
+  }
+}
