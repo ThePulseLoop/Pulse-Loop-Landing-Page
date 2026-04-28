@@ -48,6 +48,7 @@ export default function Nav() {
           <button
             className="lg:hidden flex items-center justify-center w-9 h-9 rounded-md text-[var(--txt)] hover:bg-[var(--bg3)] transition-colors"
             aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
             onClick={() => setMobileOpen((v) => !v)}
           >
             {mobileOpen ? <X size={20} strokeWidth={2} /> : <Menu size={20} strokeWidth={2} />}
@@ -59,7 +60,7 @@ export default function Nav() {
             <span className="nav-link block" onClick={() => { scrollToId("f1")(); close(); }}>{t("nav.hypothesis")}</span>
             <span className="nav-link block" onClick={() => { scrollToId("f2")(); close(); }}>{t("nav.intelligence")}</span>
             <span className="nav-link block" onClick={() => { scrollToId("f3")(); close(); }}>{t("nav.methodology")}</span>
-            <button className="nav-cta w-full mt-2" onClick={() => { scrollToFinal(); close(); }}>{t("nav.join")}</button>
+            <button className="nav-cta flex w-full mt-2" onClick={() => { scrollToFinal(); close(); }}>{t("nav.join")}</button>
           </div>
         )}
       </div>
