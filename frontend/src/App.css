@@ -721,16 +721,22 @@ button,input{font-family:inherit;}
 @media (max-width: 500px) {
   #final .final-row {
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
   }
   #final .fi-input {
     border-radius: 12px !important;
     border-right: 1px solid rgba(255,255,255,0.14) !important;
     width: 100%;
+    flex: none !important;
+    height: 54px !important;
+    min-height: 54px !important;
   }
   #final .fi-submit {
     border-radius: 12px !important;
     width: 100%;
+    flex: none !important;
+    height: 54px !important;
+    min-height: 54px !important;
   }
 }
 
