@@ -258,7 +258,6 @@ button,input{font-family:inherit;}
   padding:0 40px;
   opacity:0;animation:up 900ms 600ms var(--ease) both;
 }
-@media(max-width:640px){.hero-visual{padding:0 20px;}}
 .hero-card{
   background:var(--bg2);
   border:1px solid var(--bdr2);
@@ -276,8 +275,6 @@ button,input{font-family:inherit;}
 .hc-title{margin-left:8px;font-family:var(--font-m);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--txt3);}
 .hc-badge{margin-left:auto;display:flex;align-items:center;gap:5px;font-family:var(--font-m);font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);background:rgba(46,232,160,0.08);border:1px solid rgba(46,232,160,0.2);border-radius:999px;padding:2px 10px;}
 .hc-badge::before{content:'';width:5px;height:5px;background:var(--green);border-radius:50%;animation:pulse-dot 1.8s ease-in-out infinite;}
-.hc-body{display:grid;grid-template-columns:260px 1fr;min-height:260px;}
-@media(max-width:640px){.hc-body{grid-template-columns:1fr;}}
 .hc-sidebar{border-right:1px solid var(--bdr);padding:20px;}
 .hc-nav-item{
   display:flex;align-items:center;gap:10px;

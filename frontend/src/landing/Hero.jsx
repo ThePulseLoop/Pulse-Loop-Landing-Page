@@ -7,74 +7,76 @@ function HeroProductCard() {
   const { t } = useT();
   return (
     <div className="hero-visual">
-      <div className="hero-card">
-        <div className="hc-topbar">
-          <div className="hc-dot" style={{ background: "#FF5F57" }} />
-          <div className="hc-dot" style={{ background: "#FEBC2E" }} />
-          <div className="hc-dot" style={{ background: "#28C840" }} />
-          <div className="hc-title">{t("hero.card.brand")}</div>
-          <div className="hc-badge">{t("hero.card.live")}</div>
-        </div>
-        <div className="hc-body">
-          <div className="hc-sidebar">
-            <div className="hc-nav-item active">
-              <svg className="hc-nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <rect x="2" y="2" width="5" height="5" />
-                <rect x="9" y="2" width="5" height="5" />
-                <rect x="2" y="9" width="5" height="5" />
-                <rect x="9" y="9" width="5" height="5" />
-              </svg>
-              {t("hero.card.nav.brief")}
-            </div>
-            <div className="hc-nav-item">
-              <svg className="hc-nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <circle cx="8" cy="8" r="6" />
-                <path d="M8 5v3l2 2" />
-              </svg>
-              {t("hero.card.nav.history")}
-            </div>
-            <div className="hc-nav-item">
-              <svg className="hc-nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M2 12h12M2 8h8M2 4h6" />
-              </svg>
-              {t("hero.card.nav.reports")}
-            </div>
-            <div className="hc-nav-item">
-              <svg className="hc-nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M8 2v12M2 8l6 6 6-6" />
-              </svg>
-              {t("hero.card.nav.cert")}
-            </div>
+      <div className="overflow-x-auto sm:overflow-x-visible pb-2 sm:pb-0">
+        <div className="hero-card min-w-[300px]">
+          <div className="hc-topbar">
+            <div className="hc-dot" style={{ background: "#FF5F57" }} />
+            <div className="hc-dot" style={{ background: "#FEBC2E" }} />
+            <div className="hc-dot" style={{ background: "#28C840" }} />
+            <div className="hc-title">{t("hero.card.brand")}</div>
+            <div className="hc-badge">{t("hero.card.live")}</div>
           </div>
-          <div className="hc-main">
-            <div className="hc-report-title">{t("hero.card.report.title")}</div>
-            <div className="hc-report-sub">{t("hero.card.report.sub")}</div>
-            <div className="hc-chips">
-              <span className="hc-chip hc-chip-v">{t("hero.card.chip.verified")}</span>
-              <span className="hc-chip hc-chip-v">{t("hero.card.chip.high")}</span>
-              <span className="hc-chip hc-chip-d">{t("hero.card.chip.geo")}</span>
-              <span className="hc-chip hc-chip-d">{t("hero.card.chip.sources")}</span>
+          <div className="hc-body grid grid-cols-1 md:grid-cols-[260px_1fr] min-h-[260px]">
+            <div className="hc-sidebar hidden md:block">
+              <div className="hc-nav-item active">
+                <svg className="hc-nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <rect x="2" y="2" width="5" height="5" />
+                  <rect x="9" y="2" width="5" height="5" />
+                  <rect x="2" y="9" width="5" height="5" />
+                  <rect x="9" y="9" width="5" height="5" />
+                </svg>
+                {t("hero.card.nav.brief")}
+              </div>
+              <div className="hc-nav-item">
+                <svg className="hc-nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <circle cx="8" cy="8" r="6" />
+                  <path d="M8 5v3l2 2" />
+                </svg>
+                {t("hero.card.nav.history")}
+              </div>
+              <div className="hc-nav-item">
+                <svg className="hc-nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M2 12h12M2 8h8M2 4h6" />
+                </svg>
+                {t("hero.card.nav.reports")}
+              </div>
+              <div className="hc-nav-item">
+                <svg className="hc-nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M8 2v12M2 8l6 6 6-6" />
+                </svg>
+                {t("hero.card.nav.cert")}
+              </div>
             </div>
-            <div className="hc-signal-rows">
-              <div className="hc-sig">
-                <div className="hc-sig-bar" style={{ background: "var(--green)" }} />
-                <div className="hc-sig-txt">
-                  <strong>{t("hero.card.sig1.title")}</strong>
-                  {t("hero.card.sig1.body")}
-                </div>
+            <div className="hc-main">
+              <div className="hc-report-title">{t("hero.card.report.title")}</div>
+              <div className="hc-report-sub">{t("hero.card.report.sub")}</div>
+              <div className="hc-chips">
+                <span className="hc-chip hc-chip-v">{t("hero.card.chip.verified")}</span>
+                <span className="hc-chip hc-chip-v">{t("hero.card.chip.high")}</span>
+                <span className="hc-chip hc-chip-d">{t("hero.card.chip.geo")}</span>
+                <span className="hc-chip hc-chip-d">{t("hero.card.chip.sources")}</span>
               </div>
-              <div className="hc-sig">
-                <div className="hc-sig-bar" style={{ background: "var(--yellow)" }} />
-                <div className="hc-sig-txt">
-                  <strong>{t("hero.card.sig2.title")}</strong>
-                  {t("hero.card.sig2.body")}
+              <div className="hc-signal-rows">
+                <div className="hc-sig">
+                  <div className="hc-sig-bar" style={{ background: "var(--green)" }} />
+                  <div className="hc-sig-txt">
+                    <strong>{t("hero.card.sig1.title")}</strong>
+                    {t("hero.card.sig1.body")}
+                  </div>
                 </div>
-              </div>
-              <div className="hc-sig">
-                <div className="hc-sig-bar" style={{ background: "#60A5FA" }} />
-                <div className="hc-sig-txt">
-                  <strong>{t("hero.card.sig3.title")}</strong>
-                  {t("hero.card.sig3.body")}
+                <div className="hc-sig">
+                  <div className="hc-sig-bar" style={{ background: "var(--yellow)" }} />
+                  <div className="hc-sig-txt">
+                    <strong>{t("hero.card.sig2.title")}</strong>
+                    {t("hero.card.sig2.body")}
+                  </div>
+                </div>
+                <div className="hc-sig">
+                  <div className="hc-sig-bar" style={{ background: "#60A5FA" }} />
+                  <div className="hc-sig-txt">
+                    <strong>{t("hero.card.sig3.title")}</strong>
+                    {t("hero.card.sig3.body")}
+                  </div>
                 </div>
               </div>
             </div>
