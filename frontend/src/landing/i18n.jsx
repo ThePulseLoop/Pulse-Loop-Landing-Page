@@ -19,8 +19,8 @@ const STORAGE_KEY = "pl-lang";
 // English (default) — full key catalog
 const en = {
   // Nav
-  "nav.hypothesis": "Hypothesis",
-  "nav.intelligence": "Intelligence",
+  "nav.hypothesis": "INTELLIGENCE BRIEF",
+  "nav.intelligence": "MONITORING",
   "nav.methodology": "Methodology",
   "nav.join": "Join Waitlist",
   "nav.lang": "Language",
@@ -179,8 +179,8 @@ const en = {
 };
 
 const fr = {
-  "nav.hypothesis": "Hypothèse",
-  "nav.intelligence": "Intelligence",
+  "nav.hypothesis": "NOTE DE SYNTHÈSE",
+  "nav.intelligence": "SURVEILLANCE",
   "nav.methodology": "Méthodologie",
   "nav.join": "Rejoindre",
   "nav.lang": "Langue",
@@ -329,8 +329,8 @@ const fr = {
 };
 
 const de = {
-  "nav.hypothesis": "Hypothese",
-  "nav.intelligence": "Intelligenz",
+  "nav.hypothesis": "INTELLIGENCE BRIEF",
+  "nav.intelligence": "MONITORING",
   "nav.methodology": "Methodik",
   "nav.join": "Anmelden",
   "nav.lang": "Sprache",
@@ -469,8 +469,8 @@ const de = {
 };
 
 const nl = {
-  "nav.hypothesis": "Hypothese",
-  "nav.intelligence": "Intelligentie",
+  "nav.hypothesis": "INTELLIGENCE BRIEF",
+  "nav.intelligence": "MONITORING",
   "nav.methodology": "Methodologie",
   "nav.join": "Aanmelden",
   "nav.lang": "Taal",
@@ -609,8 +609,8 @@ const nl = {
 };
 
 const pt = {
-  "nav.hypothesis": "Hipótese",
-  "nav.intelligence": "Inteligência",
+  "nav.hypothesis": "RELATÓRIO DE INTELIGÊNCIA",
+  "nav.intelligence": "MONITORAMENTO",
   "nav.methodology": "Metodologia",
   "nav.join": "Inscrever-me",
   "nav.lang": "Idioma",
@@ -749,8 +749,8 @@ const pt = {
 };
 
 const es = {
-  "nav.hypothesis": "Hipótesis",
-  "nav.intelligence": "Inteligencia",
+  "nav.hypothesis": "INFORME DE INTELIGENCIA",
+  "nav.intelligence": "MONITOREO",
   "nav.methodology": "Metodología",
   "nav.join": "Apuntarme",
   "nav.lang": "Idioma",
@@ -889,8 +889,8 @@ const es = {
 };
 
 const sv = {
-  "nav.hypothesis": "Hypotes",
-  "nav.intelligence": "Intelligens",
+  "nav.hypothesis": "INTELLIGENCE BRIEF",
+  "nav.intelligence": "MONITORERING",
   "nav.methodology": "Metodik",
   "nav.join": "Gå med",
   "nav.lang": "Språk",
@@ -1029,8 +1029,8 @@ const sv = {
 };
 
 const ro = {
-  "nav.hypothesis": "Ipoteză",
-  "nav.intelligence": "Intelligence",
+  "nav.hypothesis": "BRIEF DE INTELIGENȚĂ",
+  "nav.intelligence": "MONITORIZARE",
   "nav.methodology": "Metodologie",
   "nav.join": "Înscrie-te",
   "nav.lang": "Limbă",
