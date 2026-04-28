@@ -1,11 +1,13 @@
 from fastapi import FastAPI, APIRouter, HTTPException
 from fastapi.responses import JSONResponse
 from starlette.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
 from supabase import create_client, Client
 import os
 import logging
 from pydantic import BaseModel, EmailStr
 from typing import Optional
+from pathlib import Path
 
 # Configure logging
 logging.basicConfig(
@@ -13,6 +15,9 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+# Load environment variables for local development
+load_dotenv(Path(__file__).parent.parent / '.env')
 
 # Supabase connection (Vercel provides these via Environment Variables)
 SUPABASE_URL = os.environ.get('SUPABASE_URL')
@@ -46,10 +51,16 @@ async def join_waitlist(payload: WaitlistRequest):
     source = (payload.source or "landing").strip()[:50]
 
     try:
-        result = supabase.table("waitlist").insert(
-            {"email": email, "source": source}
+        # Insert into Supabase with returning='minimal' to avoid RLS SELECT issues
+        supabase.table('waitlist').insert(
+            {"email": email, "source": source},
+            returning='minimal'
         ).execute()
-        return JSONResponse({"status": "joined", "data": result.data})
+
+        return JSONResponse(
+            status_code=200,
+            content={"status": "joined", "message": "Successfully joined the waitlist."}
+        )
     except Exception as e:
         msg = str(e)
         if "23505" in msg or "duplicate key" in msg.lower():
