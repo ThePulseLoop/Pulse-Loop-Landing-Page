@@ -4,12 +4,14 @@ import { useT } from "./i18n";
 export default function TrustStrip() {
   const { t } = useT();
   const items = [
-    "trust.france",
-    "trust.germany",
-    "trust.netherlands",
-    "trust.sweden",
-    "trust.austria",
-    "trust.belgium",
+    "trust.f1",
+    "trust.f2",
+    "trust.f3",
+    "trust.f4",
+    "trust.f5",
+    "trust.f6",
+    "trust.f7",
+    "trust.f8",
   ];
   return (
     <div id="trust">
