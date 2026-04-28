@@ -15,7 +15,7 @@ export default function Footer() {
   return (
     <footer className="foot">
       <div className="section-wrap">
-        <div className="foot-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="foot-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           <div>
             <div className="foot-brand"><Logo size={LOGO_FOOTER_SIZE} />PulseLoop</div>
             <div className="foot-tagline">{t("foot.tagline")}</div>

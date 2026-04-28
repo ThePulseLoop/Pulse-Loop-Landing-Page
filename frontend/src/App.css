@@ -327,6 +327,7 @@ button,input{font-family:inherit;}
 .feat-grid{}
 .feat-grid.flip{direction:rtl;}
 .feat-grid.flip > *{direction:ltr;}
+@media(max-width:639px){.feat-grid.flip{direction:ltr;}}
 .feat-tag{font-family:var(--font-m);font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--green);margin-bottom:14px;}
 .feat-h{font-family:var(--font-d);font-size:clamp(26px,3vw,40px);font-weight:800;line-height:1.1;letter-spacing:-0.02em;color:var(--txt);margin-bottom:16px;}
 .feat-body{font-family:var(--font-b);font-size:16px;line-height:1.75;color:var(--txt2);max-width:46ch;margin-bottom:28px;}
