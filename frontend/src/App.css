@@ -306,8 +306,7 @@ button,input{font-family:inherit;}
   margin-top:64px;
   background:var(--bg2);
 }
-.trust-inner{max-width:1200px;margin:0 auto;padding:0 40px;display:flex;align-items:center;gap:32px;flex-wrap:wrap;justify-content:space-between;}
-@media(max-width:640px){.trust-inner{padding:0 20px;gap:20px;}}
+.trust-inner{}
 .trust-label{font-family:var(--font-m);font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--txt3);white-space:nowrap;flex-shrink:0;}
 .trust-items{display:flex;align-items:center;gap:32px;flex-wrap:wrap;}
 .trust-item{font-family:var(--font-m);font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--txt3);display:flex;align-items:center;gap:6px;}

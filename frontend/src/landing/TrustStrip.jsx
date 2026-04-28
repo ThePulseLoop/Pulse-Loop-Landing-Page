@@ -13,7 +13,7 @@ export default function TrustStrip() {
   ];
   return (
     <div id="trust">
-      <div className="trust-inner">
+      <div className="trust-inner max-w-[1200px] mx-auto px-5 sm:px-10 flex items-center gap-5 sm:gap-8 flex-wrap justify-between">
         <span className="trust-label">{t("trust.label")}</span>
         <div className="trust-items">
           {items.map((k) => (
