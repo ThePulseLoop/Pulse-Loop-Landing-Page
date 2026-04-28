@@ -27,7 +27,7 @@ export default function Audience() {
       <div className="section-wrap">
         <h2 className="aud-top-h">{t("aud.h")}</h2>
         <p className="aud-top-sub">{t("aud.sub")}</p>
-        <div className="aud-grid">
+        <div className="aud-grid grid grid-cols-1 sm:grid-cols-2 gap-6">
           {cards.map((c) => (
             <div className="aud-card" id={c.id} key={c.id}>
               <span className={`aud-pill ${c.pillClass}`}>{t(c.pillKey)}</span>

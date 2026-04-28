@@ -441,8 +441,7 @@ button,input{font-family:inherit;}
   max-width:700px;margin-bottom:16px;
 }
 .aud-top-sub{font-family:var(--font-b);font-size:16px;line-height:1.7;color:var(--txt2);max-width:56ch;margin-bottom:60px;}
-.aud-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
-@media(max-width:680px){.aud-grid{grid-template-columns:1fr;}}
+.aud-grid{}
 .aud-card{
   background:var(--bg2);border:1px solid var(--bdr2);border-radius:10px;padding:40px;
   opacity:0;transform:translateY(20px);
