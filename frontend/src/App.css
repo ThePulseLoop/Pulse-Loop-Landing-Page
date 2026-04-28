@@ -483,7 +483,7 @@ button,input{font-family:inherit;}
 .close-line.visible{opacity:1;transform:translateY(0);}
 .final-h{font-family:var(--font-d);font-size:clamp(24px,3.5vw,44px);font-weight:800;line-height:1.1;letter-spacing:-0.02em;color:var(--txt);margin-bottom:40px;}
 .final-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;}
-.final-row{display:flex;align-items:stretch;max-width:460px;width:100%;}
+.final-row{}
 .fi-input{flex:1;height:52px;padding:0 16px;background:var(--bg3);border:1px solid var(--bdr2);border-right:none;border-radius:4px 0 0 4px;font-size:14px;color:var(--txt);outline:none;transition:border-color 150ms;font-family:var(--font-b);}
 .fi-input:focus{border-color:rgba(46,232,160,0.4);}
 .fi-input::placeholder{color:var(--txt3);}
@@ -674,7 +674,6 @@ button,input{font-family:inherit;}
 
 /* Pill controls grouping */
 [data-theme="light"] .fi-row-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%;}
-@media(min-width:640px){[data-theme="light"] .fi-row-wrap{flex-direction:row;justify-content:center;gap:14px;}}
 
 [data-theme="light"] #final .final-row{
   background:transparent;

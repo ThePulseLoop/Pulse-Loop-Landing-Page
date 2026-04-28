@@ -26,8 +26,8 @@ export default function FinalCTA() {
         </div>
         <h2 className="final-h">{t("final.h")}</h2>
         <div className="final-wrap">
-          <div ref={fiFormAreaRef} className="fi-row-wrap">
-            <form className="final-row" onSubmit={handleSubmit}>
+          <div ref={fiFormAreaRef} className="fi-row-wrap flex flex-col items-center gap-3 w-full">
+            <form className="final-row flex items-stretch w-full max-w-[460px]" onSubmit={handleSubmit}>
               <input
                 className="fi-input"
                 type="email"
