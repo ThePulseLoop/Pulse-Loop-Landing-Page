@@ -19,7 +19,7 @@ export const IO_THRESHOLD_FEAT = 0.18;
 export const IO_THRESHOLD_CERT = 0.3;
 
 // Backend
-export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:3001";
 export const API = `${BACKEND_URL}/api`;
 
 // IDs of sections to fade in via IntersectionObserver

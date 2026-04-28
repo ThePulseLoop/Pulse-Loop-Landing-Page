@@ -2,15 +2,12 @@ from fastapi import FastAPI, APIRouter, HTTPException
 from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
-from motor.motor_asyncio import AsyncIOMotorClient
 from supabase import create_client, Client
 import os
 import logging
 from pathlib import Path
-from pydantic import BaseModel, EmailStr, Field
-from typing import List, Optional
-import uuid
-from datetime import datetime
+from pydantic import BaseModel, EmailStr
+from typing import Optional
 
 
 # Configure logging early so it's available everywhere below.
@@ -24,10 +21,6 @@ logger = logging.getLogger(__name__)
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-# MongoDB connection (kept; not used by waitlist)
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
 
 # Supabase connection
 SUPABASE_URL = os.environ.get('SUPABASE_URL')
@@ -43,16 +36,6 @@ app = FastAPI()
 api_router = APIRouter(prefix="/api")
 
 
-# ───────────────────────────────────────────────────── Models
-class StatusCheck(BaseModel):
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    client_name: str
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
-
-
-class StatusCheckCreate(BaseModel):
-    client_name: str
-
 
 class WaitlistRequest(BaseModel):
     email: EmailStr
@@ -64,25 +47,6 @@ class WaitlistRequest(BaseModel):
 async def root():
     return {"message": "Hello World"}
 
-
-@api_router.post("/status", response_model=StatusCheck)
-async def create_status_check(input: StatusCheckCreate):
-    status_dict = input.dict()
-    status_obj = StatusCheck(**status_dict)
-    _ = await db.status_checks.insert_one(status_obj.dict())
-    return status_obj
-
-
-@api_router.get("/status", response_model=List[StatusCheck])
-async def get_status_checks(limit: int = 100, skip: int = 0):
-    cursor = (
-        db.status_checks
-        .find({}, {"_id": 0, "id": 1, "client_name": 1, "timestamp": 1})
-        .skip(skip)
-        .limit(min(max(limit, 1), 500))
-    )
-    status_checks = await cursor.to_list(length=min(max(limit, 1), 500))
-    return [StatusCheck(**status_check) for status_check in status_checks]
 
 
 @api_router.post("/waitlist")
@@ -138,6 +102,4 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.on_event("shutdown")
-async def shutdown_db_client():
-    client.close()
+
