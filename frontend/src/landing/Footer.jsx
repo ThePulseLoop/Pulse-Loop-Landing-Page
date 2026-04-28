@@ -45,10 +45,14 @@ export default function Footer() {
           <div>
             <div className="foot-col-h">{t("foot.markets")}</div>
             <div className="foot-col-links">
-              <a href="#">{t("foot.france")}</a>
-              <a href="#">{t("foot.dach")}</a>
-              <a href="#">{t("foot.nordics")}</a>
-              <a href="#">{t("foot.benelux")}</a>
+              <a href="#">{t("trust.f1")}</a>
+              <a href="#">{t("trust.f2")}</a>
+              <a href="#">{t("trust.f3")}</a>
+              <a href="#">{t("trust.f4")}</a>
+              <a href="#">{t("trust.f5")}</a>
+              <a href="#">{t("trust.f6")}</a>
+              <a href="#">{t("trust.f7")}</a>
+              <a href="#">{t("trust.f8")}</a>
             </div>
           </div>
         </div>
